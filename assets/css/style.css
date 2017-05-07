@@ -80,6 +80,11 @@ body {
 
 @media only screen and (max-width: 767px) {
 
+.jumbotron {
+	margin-top: 20px;
+	max-height: 627px;
+}
+
 .jumbotron h1 {
 	font-size: 70px;
 }
