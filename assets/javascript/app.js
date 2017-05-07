@@ -3,9 +3,10 @@
 // -----------------------------Background Gradient JS---------------------
 
 var colors = new Array(
-  [178,77,77],
+  [77,99,77],
   [178,158,135],
   [138,146,178],
+  [178,77,77],
   [204,194,160],
   [178,172,149],
   [204,174,160]);
@@ -98,7 +99,7 @@ var triviaGame = {
 };  // end of Trivia Game MAIN Object
 
 $('.startButton').on("click", function() {
-	$('.startButton').removeClass('infinite').addClass('animated fadeOutDown');
+	$('.startButton').removeClass('infinite').addClass('animated fadeOutDown');   //manages the Animate.css applied to Start Button
 	triviaGame.startGame();
 
 });

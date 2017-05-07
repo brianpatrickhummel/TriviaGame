@@ -55,9 +55,31 @@ body {
 	border-color: #98BFA3;
 }
 
-.glyphicon-off {
-	font-size: 30px
+.btn-primary:hover {
+	background-color: #6C8773;
+	border-color: #5F7866;
 }
 
-/* -----------------------  ------------- */
+.btn-primary:active:focus {
+	background-color: #41523F;
+	border-color: #334031;
+}
 
+.glyphicon-off {
+	font-size: 28px;
+}
+
+
+/* ------------------Media Queries ------------- */
+
+
+
+
+
+
+
+@media only screen and (max-width: 767px) {
+
+.jumbotron h1 {
+	font-size: 70px;
+}
