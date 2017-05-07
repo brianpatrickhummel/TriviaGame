@@ -2,20 +2,61 @@
 	box-sizing: border-box;
 }
 
+/*--------------- Custom Font --------------*/
+@font-face {
+  font-family: 'Terrain';
+  src: url('../fonts/TerrainFont/Terrain.otf');
+  src: url('../fonts/TerrainFont/Terrain.woff'); 
+}
+
 /* ----------------------- Background Gradient Pulse ------------- */
 
+html, body, #wrapper {
+  width: 100%;
+  height: 100%;
+}
 
 body {
-     background-color: #000000;
-   padding: 0px;
-   margin: 0px;
+ 	background-color: #000000;
+   	padding: 0px;
+   	margin: 0px;
+   	font-family: 'Terrain';
 }
 
 #gradient {
-  width: 100%;
-  height: 1000px;
-  padding: 0px;
-  margin: 0px;
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	/*position: relative;
+	z-index: 0;*/
+	
+}
+
+.jumbotron h1 {
+	font-size: 120px;
+	text-align: center;
+	color: #76947E;
+}
+
+
+.jumbotron {
+	background: #F8FFFA;
+	border-width: 1px;
+	border-color: #EBF2ED;
+	border-style: solid;
+	margin-top: 80px;
+	height: 750px;
+}
+
+
+.btn-primary {
+	background-color: #98BFA3;
+	border-color: #98BFA3;
+}
+
+.glyphicon-off {
+	font-size: 30px
 }
 
 /* -----------------------  ------------- */

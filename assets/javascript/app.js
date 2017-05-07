@@ -3,12 +3,12 @@
 // -----------------------------Background Gradient JS---------------------
 
 var colors = new Array(
-  [62,35,255],
-  [60,255,60],
-  [255,35,98],
-  [45,175,230],
-  [255,0,255],
-  [255,128,0]);
+  [178,77,77],
+  [178,158,135],
+  [138,146,178],
+  [204,194,160],
+  [178,172,149],
+  [204,174,160]);
 
 var step = 0;
 //color table indices for: 
@@ -45,6 +45,8 @@ var color2 = "rgb("+r2+","+g2+","+b2+")";
  $('#gradient').css({
    background: "-webkit-gradient(linear, left top, right top, from("+color1+"), to("+color2+"))"}).css({
     background: "-moz-linear-gradient(left, "+color1+" 0%, "+color2+" 100%)"});
+
+  
   
   step += gradientSpeed;
   if ( step >= 1 )
@@ -65,36 +67,43 @@ setInterval(updateGradient,10);
 
 
 
-// --------------------------------------------------------
+// ----------------------------TRIVIA GAME----------------------------
 
-// var trivia = [
-// 	{question:"What year did the American Revolutionary War begin?", answer:["1775", "1895", "1766", "1812"], image : ("")},
-// 	{question:"How many colors are there on a Rubik's Cube?", answer:["6", "5", "7", "4"], image : ("")},
-// 	{question:"What is the speed of light?", answer:["186,000 miles/second","8,600 miles/second","86,000 miles/second","886,000 miles/second"], image : ("")},
-// 	{question:"What is the speed of sound?", answer:[""], image : ("")},
-// 	{question:"What element's chemical symbol is Pb?", answer:["Lead","Potassium","Strontium","Palladium"], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
-// 	{question:"", answer:[""], image : ("")},
 
-// ]
+var triviaGame = {
+	triviaQuestions: {
+		one: {question:"How many colors are there on a Rubik's Cube?", answer:["6", "5", "7", "4"], image: ("")},
+		two: {question:"What is the speed of light?", answer:["186,000 miles/second","8,600 miles/second","86,000 miles/second","886,000 miles/second"], image: ("")},
+		three: {question:"Approximately how long does it take for sunlight to reach Earth??", answer:["8 minutes", "45 seconds", "10 hours", "2 hours 15 minutes"], image: ("4")},
+		four: {question:"What element's chemical symbol is Pb?", answer:["Lead","Potassium","Strontium","Palladium"], image: ("")},
+		five: {question:"How fast can bees fly?", answer:["15 mph", "35 mph", "48 mph", "8 mph"], image: ("")},
+		six: {question:"What is the most abundant element in the universe?", answer:["Hydrogen", "Oxygen", "Helium", "Carbon"], image: ("")},
+		seven: {question:"The air that we breathe is mostly comprised of which ?", answer:["Nitrogen", "Carbon", "Argon", "Oxygen" ], image: ("")},
+		eight: {question:"What is the diameter of the Earth?", answer:["8,000 miles", "140,000 miles", "2,500,000 miles", "25,000,000 miles"], image: ("")}	
+	},   //end of Questions Object
+
+	timeRemaining: 12,
+	correctAnswers: 0,
+	incorrectAnswers: 0,
+	startGame: function() {
+		// alert("game has begun");
+	},
+	loadQuestion: function() {
+
+	},
+	resetGame: function() {
+
+	},
+
+};  // end of Trivia Game MAIN Object
+
+$('.startButton').on("click", function() {
+	$('.startButton').removeClass('infinite').addClass('animated fadeOutDown');
+	triviaGame.startGame();
+
+});
+
+
+
+
+
