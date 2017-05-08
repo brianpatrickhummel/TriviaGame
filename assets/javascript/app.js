@@ -69,40 +69,64 @@ setInterval(updateGradient,10);
 
 
 // ----------------------------TRIVIA GAME----------------------------
+// var correctAnswers;
+// var incorrectAnswers;
+// var answeredQuestions;
+
+var triviaGame = [
+		{question:"How many colors are there on a Rubik's Cube?", answer:["5", "6", "7", "4"], correct:"6", image:("")},
+		{question:"What is the speed of light?", answer:["8,600 miles/second","86,000 miles/second","186,000 miles/second","886,000 miles/second"], correct:"186,000 miles/second", image:("")},
+		{question:"Approximately how long does it take for sunlight to reach Earth??", answer:["45 seconds", "10 hours", "2 hours 15 minutes", "8 minutes"], correct:"8 minutes", image:("4")},
+		{question:"What element's chemical symbol is Pb?", answer:["Potassium","Strontium","Lead","Palladium"], correct:"Lead", image:("")},
+		{question:"How fast can bees fly?", answer:["35 mph", "15 mph", "48 mph", "8 mph"], correct:"15 mph", image: ("")},
+		{question:"What is the most abundant element in the universe?", answer:["Hydrogen", "Oxygen", "Helium", "Carbon"], correct:"Hydrogen", image:("")},
+		{question:"The air that we breathe is mostly comprised of which ?", answer:["Carbon", "Argon", "Oxygen", "Nitrogen"], correct:"Nitrogen", image:("")},
+		{question:"What is the diameter of the Earth ?", answer:["140,000 miles", "2,500,000 miles", "8,000 miles", "25,000,000 miles"], correct:"8,000 miles", image:("")}	
+];
 
 
-var triviaGame = {
-	triviaQuestions: {
-		one: {question:"How many colors are there on a Rubik's Cube?", answer:["6", "5", "7", "4"], image: ("")},
-		two: {question:"What is the speed of light?", answer:["186,000 miles/second","8,600 miles/second","86,000 miles/second","886,000 miles/second"], image: ("")},
-		three: {question:"Approximately how long does it take for sunlight to reach Earth??", answer:["8 minutes", "45 seconds", "10 hours", "2 hours 15 minutes"], image: ("4")},
-		four: {question:"What element's chemical symbol is Pb?", answer:["Lead","Potassium","Strontium","Palladium"], image: ("")},
-		five: {question:"How fast can bees fly?", answer:["15 mph", "35 mph", "48 mph", "8 mph"], image: ("")},
-		six: {question:"What is the most abundant element in the universe?", answer:["Hydrogen", "Oxygen", "Helium", "Carbon"], image: ("")},
-		seven: {question:"The air that we breathe is mostly comprised of which ?", answer:["Nitrogen", "Carbon", "Argon", "Oxygen" ], image: ("")},
-		eight: {question:"What is the diameter of the Earth?", answer:["8,000 miles", "140,000 miles", "2,500,000 miles", "25,000,000 miles"], image: ("")}	
-	},   //end of Questions Object
+function startGame() {
+	console.log("game has begun");
+	$('.start-button').remove();
+	// var length = triviaGame.length;
+	// for (var j = 0; j < index; j++) {
+	// 	var chosenQuestion = triviaGame[j].question;
+	// 	console.log(chosenQuestion);
+	// 	$('.question').text(chosenQuestion);
+	var index = 0;
+	var question = triviaGame[index].question;
+	$('.question').html(question);
+	for (var i = 0; i < 4; i++) {
+		var answer = triviaGame[index].answer[i];
+		$('.answers').append('<h4>' + answer + '</h4>');
+	}
+}		
 
-	timeRemaining: 12,
-	correctAnswers: 0,
-	incorrectAnswers: 0,
-	startGame: function() {
-		// alert("game has begun");
-	},
-	loadQuestion: function() {
 
-	},
-	resetGame: function() {
 
-	},
 
-};  // end of Trivia Game MAIN Object
+// function resetGame() {
+// 	correctAnswers = 0;
+// 	incorrectAnswers = 0;
+// 	unansweredQuestions = 0;
+// }
+
+
+
+
+
 
 $('.startButton').on("click", function() {
 	$('.startButton').removeClass('infinite').addClass('animated fadeOutDown');   //manages the Animate.css applied to Start Button
-	triviaGame.startGame();
+		startGame();
 
 });
+
+
+
+
+
+
 
 
 

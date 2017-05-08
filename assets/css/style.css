@@ -9,7 +9,52 @@
   src: url('../fonts/TerrainFont/Terrain.woff'); 
 }
 
+@font-face {
+  font-family: 'Abyssopelagic';
+  src: url('../fonts/abyssopelagic.otf');
+ }
+
+
+
 /* ----------------------- Background Gradient Pulse ------------- */
+
+
+#gradient {
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	/*position: relative;
+	z-index: 0;*/
+	
+}
+
+
+/*----------------------------Welcome Page Only----------------------*/
+
+.btn-primary {
+	background-color: #98BFA3;
+	border-color: #98BFA3;
+	margin-top: 140px;
+}
+
+.btn-primary:hover {
+	background-color: #6C8773;
+	border-color: #5F7866;
+}
+
+.btn-primary:active:focus {
+	background-color: #41523F;
+	border-color: #334031;
+}
+
+.glyphicon-off {
+	font-size: 30px;
+	margin-top: 6px;
+}
+
+
+/*---------------------------Main Page----------------------------*/
 
 html, body, #wrapper {
   width: 100%;
@@ -23,15 +68,7 @@ body {
    	font-family: 'Terrain';
 }
 
-#gradient {
-	width: 100%;
-	height: 100%;
-	padding: 0px;
-	margin: 0px;
-	/*position: relative;
-	z-index: 0;*/
-	
-}
+
 
 .jumbotron h1 {
 	font-size: 120px;
@@ -49,42 +86,66 @@ body {
 	height: 750px;
 }
 
-
-.btn-primary {
-	background-color: #98BFA3;
-	border-color: #98BFA3;
+p {
+	text-align: center;
 }
 
-.btn-primary:hover {
-	background-color: #6C8773;
-	border-color: #5F7866;
+h3 {
+	font-family: Abyssopelagic;
+	letter-spacing: 3px;
+	word-spacing: 4px;
+	margin-top: 45px;
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+	color: #61302F;
+	margin-bottom: 40px;
 }
 
-.btn-primary:active:focus {
-	background-color: #41523F;
-	border-color: #334031;
+h4 {
+	color: #F8FFFA;
+	font-size: 29px;
+	text-align: center;
+	margin-bottom: 25px;
+	/*background: #8A92B2;*/
+	background-color: rgba(138, 146, 178, 0.6);
+	width: 100%;
+	padding: 5px 0;
+	border-radius: 5px;
 }
-
-.glyphicon-off {
-	font-size: 28px;
-}
-
 
 /* ------------------Media Queries ------------- */
 
+@media only screen and (max-width: 992px)  {
+	.jumbotron h1 {
+		font-size: 90px;
+	}
 
+	.container .jumbotron {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
 
-
-
+}
 
 
 @media only screen and (max-width: 767px) {
 
-.jumbotron {
-	margin-top: 20px;
-	max-height: 597px;
-}
+	.jumbotron {
+		margin-top: 20px;
+		max-height: 597px;
+	}
 
-.jumbotron h1 {
-	font-size: 70px;
+	.jumbotron h1 {
+		font-size: 30px;
+	}
+
+	h3 {
+		
+		letter-spacing: 2px;
+		word-spacing: 3px;
+		margin-top: 35px;
+		text-align: center;
+		font-size: 12px;
+	
 }
