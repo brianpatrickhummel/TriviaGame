@@ -68,48 +68,118 @@ setInterval(updateGradient,10);
 
 
 
-// ----------------------------TRIVIA GAME----------------------------
-// var correctAnswers;
-// var incorrectAnswers;
-// var answeredQuestions;
 
+
+
+
+
+// ----------------------------TRIVIA GAME----------------------------
+
+var correctAnswers = 0;
+var incorrectAnswers = 0;
+var unansweredQuestions = 0;
+var timeRemaining = 20;
+var intervalID;
+var indexQandA = 0;    //index to load a different question each round without the game reset or screen refresh
+var answered = false;   //variable to stop the timer if user has clicked an answer
 var triviaGame = [
-		{question:"How many colors are there on a Rubik's Cube?", answer:["5", "6", "7", "4"], correct:"6", image:("")},
-		{question:"What is the speed of light?", answer:["8,600 miles/second","86,000 miles/second","186,000 miles/second","886,000 miles/second"], correct:"186,000 miles/second", image:("")},
-		{question:"Approximately how long does it take for sunlight to reach Earth??", answer:["45 seconds", "10 hours", "2 hours 15 minutes", "8 minutes"], correct:"8 minutes", image:("4")},
-		{question:"What element's chemical symbol is Pb?", answer:["Potassium","Strontium","Lead","Palladium"], correct:"Lead", image:("")},
-		{question:"How fast can bees fly?", answer:["35 mph", "15 mph", "48 mph", "8 mph"], correct:"15 mph", image: ("")},
-		{question:"What is the most abundant element in the universe?", answer:["Hydrogen", "Oxygen", "Helium", "Carbon"], correct:"Hydrogen", image:("")},
-		{question:"The air that we breathe is mostly comprised of which ?", answer:["Carbon", "Argon", "Oxygen", "Nitrogen"], correct:"Nitrogen", image:("")},
-		{question:"What is the diameter of the Earth ?", answer:["140,000 miles", "2,500,000 miles", "8,000 miles", "25,000,000 miles"], correct:"8,000 miles", image:("")}	
+		{question:"How many colors are there on a Rubik's Cube?", answer:["5", "6", "7", "4"], correct: "1", image:("../images/rubik.png")},
+		{question:"What is the speed of light?", answer:["8,600 miles/second","86,000 miles/second","186,000 miles/second","886,000 miles/second"], correct:"2", image:("../images/lightspeed.jpg")},
+		{question:"Approximately how long does it take for sunlight to reach Earth??", answer:["45 seconds", "10 hours", "2 hours 15 minutes", "8 minutes"], correct:"3", image:("../images/sunlight.jpg")},
+		{question:"What element's chemical symbol is Pb?", answer:["Potassium","Strontium","Lead","Palladium"], correct:"2", image:("../images/periodictable.png")},
+		{question:"How fast can bees fly?", answer:["35 mph", "15 mph", "48 mph", "8 mph"], correct:"1", image: ("../images/bee.png")},
+		{question:"What is the most abundant element in the universe?", answer:["Hydrogen", "Oxygen", "Helium", "Carbon"], correct:"0", image:("../images/universe.png")},
+		{question:"The air that we breathe is mostly comprised of which ?", answer:["Carbon", "Argon", "Oxygen", "Nitrogen"], correct:"3", image:("../images/breathe.jpg")},
+		{question:"What is the diameter of the Earth ?", answer:["140,000 miles", "2,500,000 miles", "8,000 miles", "25,000,000 miles"], correct:"2", image:("../images/earth.png")}	
 ];
+
+function correctAnswer() {
+	correctAnswers++;
+	$('.timeRemaining').text("YOU HAVE ANSWERED CORRECTLY!").css({'color':'#3D414F', 'font-size':'28px'}).addClass('animated pulse infinite');
+}
+
+function incorrectAnswer() {
+	incorrectAnswers++;
+	$('.timeRemaining').text("YOU HAVE ANSWERED INCORRECTLY!").css({'color':'#3D414F', 'font-size':'28px'}).addClass('animated pulse infinite');
+
+}
+
+function unAnswered() {
+	unansweredQuestions++;
+	$('.timeRemaining').text("YOU FAILED TO CHOOSE AN ANSWER").css({'color':'#3D414F', 'font-size':'28px'}).addClass('animated pulse infinite');
+}
+
+function timer() {
+	if (timeRemaining === 0) {
+		clearInterval(intervalID);  
+		unAnswered();
+	}
+	else if (answered === true) {
+		clearInterval(intervalID); 
+	}
+	else {
+		timeRemaining--;
+		$('.timeRemaining').text('YOU HAVE ' + timeRemaining + ' SECONDS TO CHOOSE');
+	}
+}	
+
+function loadQandA() {
+	timeRemaining = 21;
+	intervalID = setInterval(timer, 1000);
+	if (answered === false){
+		timer();
+	}
+	
+	var correct = triviaGame[indexQandA].correct;
+	var question = triviaGame[indexQandA].question;
+	$('.question').html(question);
+	for (var i = 0; i < 4; i++) {
+		var answer = triviaGame[indexQandA].answer[i];
+		$('.answers').append('<h4 id=' + i + '>' + answer + '</h4>');
+	}
+	indexQandA++;
+
+	//  if click else if time runs out ??????	
+	
+	if (timeRemaining === 0) {
+		answered = true;
+		$('.timeRemaining').text("YOU FAILED TO CHOOSE AN ANSWER");
+	}
+	
+	$( "h4" ).click(function() {
+  		var id = $(this).attr('id');
+  		// alert(id);
+  		if (id === correct) {
+  			answered = true;    // stops the timer
+  			// alert("correct answer");
+  			correctAnswer ();
+  		}
+  		else {
+  			answered = true;    //stops the timer
+  			// alert("incorrect answer");
+  			incorrectAnswer();
+  		}
+	});	
+	
+}
+
 
 
 function startGame() {
 	console.log("game has begun");
 	$('.start-button').remove();
-	// var length = triviaGame.length;
-	// for (var j = 0; j < index; j++) {
-	// 	var chosenQuestion = triviaGame[j].question;
-	// 	console.log(chosenQuestion);
-	// 	$('.question').text(chosenQuestion);
-	var index = 0;
-	var question = triviaGame[index].question;
-	$('.question').html(question);
-	for (var i = 0; i < 4; i++) {
-		var answer = triviaGame[index].answer[i];
-		$('.answers').append('<h4>' + answer + '</h4>');
-	}
+	correctAnswers = 0;
+	incorrectAnswers = 0;
+	unansweredQuestions = 0;
+	loadQandA ();
 }		
 
 
+// function resetGame()  ??????????
 
 
-// function resetGame() {
-// 	correctAnswers = 0;
-// 	incorrectAnswers = 0;
-// 	unansweredQuestions = 0;
-// }
+
+
 
 
 
