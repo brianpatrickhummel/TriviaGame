@@ -67,40 +67,30 @@ var color2 = "rgb("+r2+","+g2+","+b2+")";
 setInterval(updateGradient,10);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 // ----------------------------TRIVIA GAME----------------------------
 
 var correctAnswers = 0;
 var incorrectAnswers = 0;
 var unansweredQuestions = 0;
-var timeRemaining = 20;
+var timeRemaining = 16;
 var intervalID;
 var indexQandA = 0;    //index to load a different question each round without the game reset or screen refresh
 var answered = false;  //variable to stop the timer if user has clicked an answer
+var correct;
 var triviaGame = [
-		{question:"How many colors are there on a Rubik's Cube?", answer:["5", "6", "7", "4"], correct: "1", image:("../images/rubik.png")},
-		{question:"What is the speed of light?", answer:["8,600 miles/second","86,000 miles/second","186,000 miles/second","886,000 miles/second"], correct:"2", image:("../images/lightspeed.jpg")},
-		{question:"Approximately how long does it take for sunlight to reach Earth ?", answer:["45 seconds", "10 hours", "2 hours 15 minutes", "8 minutes"], correct:"3", image:("../images/sunlight.jpg")},
-		{question:"What element's chemical symbol is Pb?", answer:["Potassium","Strontium","Lead","Palladium"], correct:"2", image:("../images/periodictable.png")},
-		{question:"How fast can bees fly?", answer:["35 mph", "15 mph", "48 mph", "8 mph"], correct:"1", image: ("../images/bee.png")},
-		{question:"What is the most abundant element in the universe?", answer:["Hydrogen", "Oxygen", "Helium", "Carbon"], correct:"0", image:("../images/universe.png")},
-		{question:"The air that we breathe is mostly comprised of which ?", answer:["Carbon", "Argon", "Oxygen", "Nitrogen"], correct:"3", image:("../images/breathe.jpg")},
-		{question:"What is the diameter of the Earth ?", answer:["140,000 miles", "2,500,000 miles", "8,000 miles", "25,000,000 miles"], correct:"2", image:("../images/earth.png")}	
+		{question:"How many colors are there on a Rubik's Cube?", answer:["5", "6", "7", "4"], correct: "1", image:("assets/images/rubik.png")},
+		{question:"What is the speed of light?", answer:["8,600 miles/second","86,000 miles/second","186,000 miles/second","886,000 miles/second"], correct:"2", image:("assets//images/lightspeed.jpg")},
+		{question:"Approximately how long does it take for sunlight to reach Earth ?", answer:["45 seconds", "10 hours", "2 hours 15 minutes", "8 minutes"], correct:"3", image:("assets//images/sunlight.jpg")},
+		{question:"What element's chemical symbol is Pb?", answer:["Potassium","Strontium","Lead","Palladium"], correct:"2", image:("assets//images/periodictable.png")},
+		{question:"How fast can bees fly?", answer:["35 mph", "15 mph", "48 mph", "8 mph"], correct:"1", image: ("assets/images/bee.png")},
+		{question:"What is the most abundant element in the universe?", answer:["Hydrogen", "Oxygen", "Helium", "Carbon"], correct:"0", image:("assets//images/universe.png")},
+		{question:"The air that we breathe is mostly comprised of which ?", answer:["Carbon", "Argon", "Oxygen", "Nitrogen"], correct:"3", image:("assets//images/breathe.jpg")},
+		{question:"What is the diameter of the Earth ?", answer:["140,000 miles", "2,500,000 miles", "8,000 miles", "25,000,000 miles"], correct:"2", image:("assets//images/earth.png")}	
 ];
 
 function resetRound() {
 	$('.answersAll').remove();
+	$('.answers').append('<img class=answerImage src="' + triviaGame[indexQandA].image + ' ">');   // adds answer image
 	indexQandA++;   								// increments index which will load next question when loadQandA() is called again
 	setTimeout(function(){ loadQandA(); }, 5000);
 }
@@ -127,6 +117,7 @@ function unAnswered() {
 function timer() { 
 	if (timeRemaining === 0) {
 		clearInterval(intervalID);  
+		$('.question').text("THE CORRECT ANSWER IS: " + triviaGame[indexQandA].answer[correct]);
 		unAnswered();
 	}
 	else if (answered === true) {
@@ -143,25 +134,19 @@ function loadQandA() {
 	console.log(incorrectAnswers);
 	console.log(unansweredQuestions);
 	console.log(indexQandA);
-	answered= false;    // will allow timeRemaining to be pushed back to <h5> after round reset....else statement in function timer()
-	timeRemaining = 21;
-	
+	$('.answerImage').remove();    // removes answer image from previous round
+	answered = false;    // will allow timeRemaining to be pushed back to <h5> after round reset....else statement in function timer()
+	timeRemaining = 16;
 	intervalID = setInterval(timer, 1000);
 	if (answered === false){
 		timer();
 	}
-	
-	var correct = triviaGame[indexQandA].correct;
+	correct = triviaGame[indexQandA].correct;
 	var question = triviaGame[indexQandA].question;
 	$('.question').html(question);
 	for (var i = 0; i < 4; i++) {
 		var answer = triviaGame[indexQandA].answer[i];
 		$('.answers').append('<h4 class= answersAll id=' + i + '>' + answer + '</h4>');
-	}
-	
-	if (timeRemaining === 0) {
-		answered = true;
-		$('.timeRemaining').text("YOU FAILED TO CHOOSE AN ANSWER");
 	}
 	
 	$( "h4" ).click(function() {

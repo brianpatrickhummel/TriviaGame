@@ -27,9 +27,6 @@
 	height: 100%;
 	padding: 0px;
 	margin: 0px;
-	/*position: relative;
-	z-index: 0;*/
-	
 }
 
 
@@ -107,6 +104,8 @@ h4 /*answers*/ {
 	font-size: 40px;
 	text-align: center;
 	margin-bottom: 25px;
+/*	margin-left: 10px;
+	margin-right: 10px;*/
 	background-color: rgba(138, 146, 178, 0.6);
 	width: 100%;
 	padding: 5px 0;
@@ -120,6 +119,12 @@ h5 /*timer*/ {
 	letter-spacing: 2px;
 	margin-top: 30px;
 	font-family: 'Magnitude-Light';
+}
+
+.answerImage {
+	max-width:300px;     /*center image and limit size*/
+	display: block; 
+	margin: 0 auto;
 }
 
 /* ------------------Media Queries ------------- */
@@ -162,6 +167,13 @@ h5 /*timer*/ {
 	h4 /*answers*/ {
 		font-size: 35px;
 	}
+
+	.answerImage {
+		max-width:300px;     /*center image and limit size*/
+		display: block; 
+		margin: 0 auto;
+	}	
+
 }
 
 
@@ -192,6 +204,13 @@ h5 /*timer*/ {
 	h5 {
 		font-size: 16px;
 	}
+
+	.answerImage {
+		max-width:300px;     /*center image and limit size*/
+		display: block; 
+		margin: 0 auto;
+	}
+
 
 }
 
