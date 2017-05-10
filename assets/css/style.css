@@ -119,7 +119,8 @@ h5 /*timer*/ {
 }
 
 .answerImage {
-	max-width:300px;     /*center image and limit size*/
+	max-width: 500px; 
+	max-height: 300px;    /*center image and limit size*/
 	display: block; 
 	margin: 0 auto;
 }
@@ -168,8 +169,8 @@ h5 /*timer*/ {
 	}
 
 	.answerImage {
-		max-width: 300px;     /*center image and limit size*/
-		display: block; 
+		max-width: 400px; 
+		max-height: 3000px    /*center image and limit size*/
 		margin: 0 auto;
 	}	
 
@@ -212,7 +213,7 @@ h5 /*timer*/ {
 
 	.answerImage {
 		max-width: 300px;     /*center image and limit size*/
-		max-height: 300px;
+		max-height: 250px;
 		display: block; 
 		margin: 0 auto;
 	}
