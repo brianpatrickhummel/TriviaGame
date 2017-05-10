@@ -80,8 +80,7 @@ body {
 	border-color: #EBF2ED;
 	border-style: solid;
 	margin-top: 80px;
-	/*height: 100%;*/
-	max-height: 98%;
+	height: 100%;
 }
 
 p {
@@ -203,7 +202,11 @@ h5 /*timer*/ {
 	}
 
 	h5 {
-		font-size: 16px;
+		font-size: 12px;
+	}
+
+	h4 /*answers*/ {
+		font-size: 30px;
 	}
 
 	.answerImage {
