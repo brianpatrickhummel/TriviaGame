@@ -1,5 +1,149 @@
 // alert("linked");
 
+
+
+
+// ----------------------------TRIVIA GAME----------------------------
+
+var correctAnswers = 0;
+var incorrectAnswers = 0;
+var unansweredQuestions = 0;
+var timeRemaining = 16;
+var intervalID;
+var indexQandA = 0;    //index to load a different question each round without the game reset or screen refresh
+var answered = false;  //variable to stop the timer if user has clicked an answer
+var correct;
+var triviaGame = [
+		{question:"HOW MANY COLORS ARE THERE ON A RUBIK'S CUBE ?", answer:["5", "6", "7", "4"], correct: "1", image:("assets/images/rubik.png")},
+		{question:"WHAT IS THE SPEED OF LIGHT ?", answer:["8,600 MILES per SECOND","86,000 MILES per SECOND","186,000 MILES per SECOND","886,000 MILES per SECOND"], correct:"2", image:("assets//images/lightspeed.jpg")},
+		{question:"APPROXIMATELY HOW LONG DOES IT TAKE FOR SUNLIGHT TO REACH THE EARTH ?", answer:["45 SECONDS", "10 HOURS", "2 HOURS 15 MINUTES", "8 MINUTES"], correct:"3", image:("assets//images/sunlight.jpg")},
+		{question:"WHAT ELEMENT'S CHEMICAL SYMBOL IS Pb ?", answer:["POTASSIUM","STRONTIUM","LEAD","PALLADIUM"], correct:"2", image:("assets//images/periodictable.png")},
+		{question:"HOW FAST CAN BEES FLY ?", answer:["35 MPH", "15 MPH", "48 MPH", "8 MPH"], correct:"1", image: ("assets/images/bee.png")},
+		{question:"WHAT IS THE MOST ABUNDANT ELEMENT IN THE UNIVERSE ?", answer:["HYDROGEN", "OXYGEN", "HELIUM", "CARBON"], correct:"0", image:("assets//images/universe.png")},
+		{question:"THE AIR THAT WE BREATHE IS COMPRISED MOSTLY OF WHAT ELEMENT ?", answer:["CARBON", "ARGON", "OXYGEN", "NITROGEN"], correct:"3", image:("assets//images/breathe.jpg")},
+		{question:"WHAT IS THE DIAMETER OF THE EARTH ?", answer:["140,000 MILES", "2,500,000 MILES", "8,000 MILES", "25,000,000 MILES"], correct:"2", image:("assets//images/earth.png")}	
+];
+
+// ------------- FUNCTION DECLARATIONS ----------------------------
+
+
+function startGame() {
+	console.log("game has begun");
+	$('.start-button').remove();
+	correctAnswers = 0;
+	incorrectAnswers = 0;
+	unansweredQuestions = 0;
+	loadQandA ();
+}		
+
+function loadQandA() {
+	console.log(correctAnswers);
+	console.log(incorrectAnswers);
+	console.log(unansweredQuestions);
+	console.log(indexQandA);
+	$('.answerImage').remove();    // removes answer image from previous round
+	answered = false;    // will allow timeRemaining to be pushed back to <h5> after round reset....else statement in function timer()
+	timeRemaining = 16;
+	intervalID = setInterval(timer, 1000);
+	if (answered === false){
+		timer();
+	}
+	correct = triviaGame[indexQandA].correct;
+	var question = triviaGame[indexQandA].question;
+	$('.question').html(question);
+	for (var i = 0; i < 4; i++) {
+		var answer = triviaGame[indexQandA].answer[i];
+		$('.answers').append('<h4 class= answersAll id=' + i + '>' + answer + '</h4>');
+	}
+	
+	$( "h4" ).click(function() {
+  		var id = $(this).attr('id');
+  		// alert(id);
+  		if (id === correct) {
+  			answered = true;    // stops the timer
+  			// alert("correct answer");
+  			$('.question').text("THE ANSWER IS: " + triviaGame[indexQandA].answer[correct]);
+  			correctAnswer ();
+  		}
+  		else {
+  			answered = true;    //stops the timer
+  			// alert("incorrect answer");
+  			$('.question').text("YOU CHOSE: " + triviaGame[indexQandA].answer[id] + ".....HOWEVER THE ANSWER IS: " + triviaGame[indexQandA].answer[correct]);
+  			incorrectAnswer();
+  		}
+	});		
+}
+
+function timer() { 
+	if (timeRemaining === 0) {
+		clearInterval(intervalID);  
+		$('.question').text("THE CORRECT ANSWER IS: " + triviaGame[indexQandA].answer[correct]);
+		unAnswered();
+	}
+	else if (answered === true) {
+		clearInterval(intervalID); 
+	}
+	else {
+		timeRemaining--;
+		$('.timeRemaining').text('YOU HAVE ' + timeRemaining + ' SECONDS TO CHOOSE').removeClass('animated pulse infinite');
+	}
+}	
+
+function correctAnswer() {
+	correctAnswers++;
+	$('.timeRemaining').text("YOU HAVE ANSWERED CORRECTLY!").css({'color':'#3D414F'}).addClass('animated pulse infinite');
+	resetRound();
+}
+
+function incorrectAnswer() {
+	incorrectAnswers++;
+	$('.timeRemaining').text("YOU HAVE ANSWERED INCORRECTLY!").css({'color':'#3D414F'}).addClass('animated pulse infinite');
+	resetRound();
+
+}
+
+function unAnswered() {
+	unansweredQuestions++;
+	$('.timeRemaining').text("YOU FAILED TO CHOOSE AN ANSWER").css({'color':'#3D414F'}).addClass('animated pulse infinite');
+	resetRound();
+}
+
+function resetRound() {
+	$('.answersAll').remove();
+	$('.answers').append('<img class=answerImage src="' + triviaGame[indexQandA].image + ' ">');   // adds answer image
+	indexQandA++;   								// increments index which will load next question when loadQandA() is called again
+	if (indexQandA < triviaGame.length) {
+		setTimeout(function(){ loadQandA(); }, 1000);
+	}
+	else {
+		setTimeout(function(){ alert("game is over"); }, 5000);  // replace alert with the final results screen to DOM
+		setTimeout(function(){ location.reload(); }, 7000);    
+	}
+}
+
+// function loadResults() {}  replace the answers section and end of game
+
+// function resetGame() {}  ??????????
+
+
+
+
+// ----------------------- MAIN PROCESS ---------------------
+
+
+$('.startButton').on("click", function() {
+	$('.startButton').removeClass('infinite').addClass('animated fadeOutDown');   //manages the Animate.css applied to Start Button
+		startGame();
+
+});
+
+
+
+
+
+
+
+
 // -----------------------------Background Gradient JS---------------------
 
 var colors = new Array(
@@ -65,135 +209,6 @@ var color2 = "rgb("+r2+","+g2+","+b2+")";
 }
 
 setInterval(updateGradient,10);
-
-
-// ----------------------------TRIVIA GAME----------------------------
-
-var correctAnswers = 0;
-var incorrectAnswers = 0;
-var unansweredQuestions = 0;
-var timeRemaining = 16;
-var intervalID;
-var indexQandA = 0;    //index to load a different question each round without the game reset or screen refresh
-var answered = false;  //variable to stop the timer if user has clicked an answer
-var correct;
-var triviaGame = [
-		{question:"How many colors are there on a Rubik's Cube?", answer:["5", "6", "7", "4"], correct: "1", image:("assets/images/rubik.png")},
-		{question:"What is the speed of light?", answer:["8,600 miles/second","86,000 miles/second","186,000 miles/second","886,000 miles/second"], correct:"2", image:("assets//images/lightspeed.jpg")},
-		{question:"Approximately how long does it take for sunlight to reach Earth ?", answer:["45 seconds", "10 hours", "2 hours 15 minutes", "8 minutes"], correct:"3", image:("assets//images/sunlight.jpg")},
-		{question:"What element's chemical symbol is Pb?", answer:["Potassium","Strontium","Lead","Palladium"], correct:"2", image:("assets//images/periodictable.png")},
-		{question:"How fast can bees fly?", answer:["35 mph", "15 mph", "48 mph", "8 mph"], correct:"1", image: ("assets/images/bee.png")},
-		{question:"What is the most abundant element in the universe?", answer:["Hydrogen", "Oxygen", "Helium", "Carbon"], correct:"0", image:("assets//images/universe.png")},
-		{question:"The air that we breathe is mostly comprised of which ?", answer:["Carbon", "Argon", "Oxygen", "Nitrogen"], correct:"3", image:("assets//images/breathe.jpg")},
-		{question:"What is the diameter of the Earth ?", answer:["140,000 miles", "2,500,000 miles", "8,000 miles", "25,000,000 miles"], correct:"2", image:("assets//images/earth.png")}	
-];
-
-function resetRound() {
-	$('.answersAll').remove();
-	$('.answers').append('<img class=answerImage src="' + triviaGame[indexQandA].image + ' ">');   // adds answer image
-	indexQandA++;   								// increments index which will load next question when loadQandA() is called again
-	setTimeout(function(){ loadQandA(); }, 5000);
-}
-
-function correctAnswer() {
-	correctAnswers++;
-	$('.timeRemaining').text("YOU HAVE ANSWERED CORRECTLY!").css({'color':'#3D414F'}).addClass('animated pulse infinite');
-	resetRound();
-}
-
-function incorrectAnswer() {
-	incorrectAnswers++;
-	$('.timeRemaining').text("YOU HAVE ANSWERED INCORRECTLY!").css({'color':'#3D414F'}).addClass('animated pulse infinite');
-	resetRound();
-
-}
-
-function unAnswered() {
-	unansweredQuestions++;
-	$('.timeRemaining').text("YOU FAILED TO CHOOSE AN ANSWER").css({'color':'#3D414F'}).addClass('animated pulse infinite');
-	resetRound();
-}
-
-function timer() { 
-	if (timeRemaining === 0) {
-		clearInterval(intervalID);  
-		$('.question').text("THE CORRECT ANSWER IS: " + triviaGame[indexQandA].answer[correct]);
-		unAnswered();
-	}
-	else if (answered === true) {
-		clearInterval(intervalID); 
-	}
-	else {
-		timeRemaining--;
-		$('.timeRemaining').text('YOU HAVE ' + timeRemaining + ' SECONDS TO CHOOSE').removeClass('animated pulse infinite');
-	}
-}	
-
-function loadQandA() {
-	console.log(correctAnswers);
-	console.log(incorrectAnswers);
-	console.log(unansweredQuestions);
-	console.log(indexQandA);
-	$('.answerImage').remove();    // removes answer image from previous round
-	answered = false;    // will allow timeRemaining to be pushed back to <h5> after round reset....else statement in function timer()
-	timeRemaining = 16;
-	intervalID = setInterval(timer, 1000);
-	if (answered === false){
-		timer();
-	}
-	correct = triviaGame[indexQandA].correct;
-	var question = triviaGame[indexQandA].question;
-	$('.question').html(question);
-	for (var i = 0; i < 4; i++) {
-		var answer = triviaGame[indexQandA].answer[i];
-		$('.answers').append('<h4 class= answersAll id=' + i + '>' + answer + '</h4>');
-	}
-	
-	$( "h4" ).click(function() {
-  		var id = $(this).attr('id');
-  		// alert(id);
-  		if (id === correct) {
-  			answered = true;    // stops the timer
-  			// alert("correct answer");
-  			$('.question').text("THE ANSWER IS: " + triviaGame[indexQandA].answer[correct]);
-  			correctAnswer ();
-  		}
-  		else {
-  			answered = true;    //stops the timer
-  			// alert("incorrect answer");
-  			$('.question').text("YOU CHOSE: " + triviaGame[indexQandA].answer[id] + ".....HOWEVER THE ANSWER IS: " + triviaGame[indexQandA].answer[correct]);
-  			incorrectAnswer();
-  		}
-	});		
-}
-
-// function loadResults() {}  replace the answers section and end of game
-
-// function resetGame() {}  ??????????
-
-
-function startGame() {
-	console.log("game has begun");
-	$('.start-button').remove();
-	correctAnswers = 0;
-	incorrectAnswers = 0;
-	unansweredQuestions = 0;
-	loadQandA ();
-}		
-
-
-// ----------------------- MAIN PROCESS ---------------------
-
-
-$('.startButton').on("click", function() {
-	$('.startButton').removeClass('infinite').addClass('animated fadeOutDown');   //manages the Animate.css applied to Start Button
-		startGame();
-
-});
-
-
-
-
 
 
 

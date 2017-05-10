@@ -97,6 +97,7 @@ h3 /*question*/ {
 	font-weight: bold;
 	color: #61302F;
 	margin-bottom: 40px;
+	line-height: 40px;
 }
 
 h4 /*answers*/ {
@@ -156,6 +157,7 @@ h5 /*timer*/ {
 	h3 /*question*/{
 		font-size: 22px;
 		line-height: 30px;
+		
 	}
 
 	h5 /*timer*/{
