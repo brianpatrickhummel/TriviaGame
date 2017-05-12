@@ -54,10 +54,8 @@ function loadQandA() {
 		var answer = triviaGame[indexQandA].answer[i];
 		$('.answers').append('<h4 class= answersAll id=' + i + '>' + answer + '</h4>');
 	}
-	
 	$( "h4" ).click(function() {
   		var id = $(this).attr('id');
-  		// alert(id);
   		if (id === correct) {
   			answered = true;    // stops the timer
   			$('.question').text("THE ANSWER IS: " + triviaGame[indexQandA].answer[correct]);
@@ -129,9 +127,6 @@ function resetRound() {
 }
 
 
-
-
-
 // ----------------------- MAIN PROCESS ---------------------
 
 
@@ -140,12 +135,6 @@ $('.startButton').on("click", function() {
 		startGame();
 
 });
-
-
-
-
-
-
 
 
 // -----------------------------Background Gradient JS---------------------
@@ -171,8 +160,7 @@ var colorIndices = [0,1,2,3];
 var gradientSpeed = 0.002;
 
 function updateGradient()
-{
-  
+{ 
   if ( $===undefined ) return;
   
 var c0_0 = colors[colorIndices[0]];
@@ -194,9 +182,7 @@ var color2 = "rgb("+r2+","+g2+","+b2+")";
  $('#gradient').css({
    background: "-webkit-gradient(linear, left top, right top, from("+color1+"), to("+color2+"))"}).css({
     background: "-moz-linear-gradient(left, "+color1+" 0%, "+color2+" 100%)"});
-
-  
-  
+ 
   step += gradientSpeed;
   if ( step >= 1 )
   {
@@ -207,11 +193,9 @@ var color2 = "rgb("+r2+","+g2+","+b2+")";
     //pick two new target color indices
     //do not pick the same as the current one
     colorIndices[1] = ( colorIndices[1] + Math.floor( 1 + Math.random() * (colors.length - 1))) % colors.length;
-    colorIndices[3] = ( colorIndices[3] + Math.floor( 1 + Math.random() * (colors.length - 1))) % colors.length;
-    
+    colorIndices[3] = ( colorIndices[3] + Math.floor( 1 + Math.random() * (colors.length - 1))) % colors.length;  
   }
 }
-
 setInterval(updateGradient,10);
 
 
