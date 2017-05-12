@@ -9,7 +9,7 @@ var correctAnswers = 0;
 var incorrectAnswers = 0;
 var unansweredQuestions = 0;
 var timeRemaining = 16;
-var intervalID;
+var intervalID = null;
 var indexQandA = 0;    //index to load a different question each round without the game reset or screen refresh
 var answered = false;  //variable to stop the timer if user has clicked an answer
 var correct;
@@ -41,7 +41,6 @@ function loadQandA() {
 	// console.log(incorrectAnswers);
 	// console.log(unansweredQuestions);
 	// console.log(indexQandA);
-	
 	answered = false;    // will allow timeRemaining to be pushed back to <h5> after round reset....else statement in function timer()
 	timeRemaining = 16;
 	intervalID = setInterval(timer, 1000);
@@ -61,13 +60,11 @@ function loadQandA() {
   		// alert(id);
   		if (id === correct) {
   			answered = true;    // stops the timer
-  			// alert("correct answer");
   			$('.question').text("THE ANSWER IS: " + triviaGame[indexQandA].answer[correct]);
   			correctAnswer ();
   		}
   		else {
   			answered = true;    //stops the timer
-  			// alert("incorrect answer");
   			$('.question').text("YOU CHOSE: " + triviaGame[indexQandA].answer[id] + ".....HOWEVER THE ANSWER IS: " + triviaGame[indexQandA].answer[correct]);
   			incorrectAnswer();
   		}
@@ -75,14 +72,17 @@ function loadQandA() {
 }
 
 function timer() { 
-	if (timeRemaining === 0) {
+	if (answered === true) {
+		clearInterval(intervalID); 
+	}
+
+	else if (timeRemaining === 0) {
+		answered = true;
 		clearInterval(intervalID);  
 		$('.question').text("THE CORRECT ANSWER IS: " + triviaGame[indexQandA].answer[correct]);
 		unAnswered();
 	}
-	else if (answered === true) {
-		clearInterval(intervalID); 
-	}
+
 	else {
 		timeRemaining--;
 		$('.timeRemaining').text('YOU HAVE ' + timeRemaining + ' SECONDS TO CHOOSE').removeClass('animated pulse infinite');
@@ -113,24 +113,21 @@ function resetRound() {
 	$('.answers').append('<img class=answerImage src="' + triviaGame[indexQandA].image + ' ">');   // adds answer image
 	indexQandA++;   								// increments index which will load next question when loadQandA() is called again
 	if (indexQandA < triviaGame.length) {
-		setTimeout(function(){ loadQandA(); $('.answerImage').remove();}, 4600);         // removes answer image from previous round
+		setTimeout(function(){ loadQandA(); $('.answerImage').remove();}, 5000);         // removes answer image from previous round
 	}
 	else {
 		setTimeout(function(){ 
 			$('.question').remove();
 			$('.timeRemaining').remove();
 			$('.answerImage').remove(); 
-			$('.answers').append('<h4 class= answersAll>CORRECT ANSWERS: ' + correctAnswers + '</h4>');
-			$('.answers').append('<h4 class= answersAll>INCORRECT ANSWERS: ' + incorrectAnswers + '</h4>');
-			$('.answers').append('<h4 class= answersAll>UNANSWERED QUESTIONS: ' + unansweredQuestions + '</h4>');
+			$('.answers').append('<h4 class= answersAll end>CORRECT ANSWERS: ' + correctAnswers + '</h4>');
+			$('.answers').append('<h4 class= answersAll end>INCORRECT ANSWERS: ' + incorrectAnswers + '</h4>');
+			$('.answers').append('<h4 class= answersAll end>UNANSWERED QUESTIONS: ' + unansweredQuestions + '</h4>');
 			setTimeout(function(){ location.reload(); }, 7000);    
 		}, 5000);  
 	}
 }
 
-// function loadResults() {}  replace the answers section and end of game
-
-// function resetGame() {}  ??????????
 
 
 

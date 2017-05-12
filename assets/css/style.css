@@ -23,7 +23,8 @@
 
 
 #gradient {
-	width: 100%;
+	/*width: 100%;*/
+	min-height: 900px;
 	height: 100%;
 	padding: 0px;
 	margin: 0px;
@@ -69,7 +70,7 @@ body {
 }
 
 .jumbotron h1 {
-	font-size: 120px;
+	font-size: 90px;
 	text-align: center;
 	color: #76947E;
 }
@@ -80,7 +81,10 @@ body {
 	border-color: #EBF2ED;
 	border-style: solid;
 	margin-top: 80px;
+	margin-left: 105px;
+	margin-right: 105px;
 	height: 100%;
+	overflow: auto;
 }
 
 p {
@@ -88,12 +92,12 @@ p {
 }
 
 h3 /*question*/ {
-	font-family: Magnitude-Light;
+	font-family: Abyssopelagic;
 	letter-spacing: 3px;
 	word-spacing: 4px;
 	margin-top: 45px;
 	text-align: center;
-	font-size: 24px;
+	font-size: 36px;
 	font-weight: bold;
 	color: #61302F;
 	margin-bottom: 40px;
@@ -110,13 +114,13 @@ h4 /*answers*/ {
 	border-radius: 5px;
 }
 
-h5 /*timer*/ {
+h5 /*timeremaining*/ {
 	color: #343F38;
 	text-align: center;
-	font-size: 20px;
+	font-size: 26px;
 	letter-spacing: 2px;
-	margin-top: 30px;
-	font-family: 'Magnitude-Light';
+	margin-top: 40px;
+	font-family: Abyssopelagic;
 }
 
 .answerImage {
@@ -126,11 +130,24 @@ h5 /*timer*/ {
 	margin: 0 auto;
 }
 
+.answers {
+	margin-top: 30px;
+}
+
+/*.end {
+	margin-top: 30px;         AT MARGIN TOP FOR ALL RESULTS ELEMENTS FOR EACH MEDIA QUERY
+}*/
+
 /* ------------------Media Queries ------------- */
 
 @media only screen and (max-width: 992px)  {
 	.jumbotron h1 {
 		font-size: 90px;
+	}
+
+	.jumbotron {
+		margin-left: 35px;
+		margin-right: 35px;
 	}
 
 	.container .jumbotron {
@@ -155,13 +172,12 @@ h5 /*timer*/ {
 	}
 
 	h3 /*question*/{
-		font-size: 22px;
+		font-size: 30px;
 		line-height: 30px;
-		
 	}
 
-	h5 /*timer*/{
-		font-size: 18px;
+	h5 /*timeremaining*/{
+		font-size: 22px;
 	}
 
 	h4 /*answers*/ {
@@ -184,18 +200,22 @@ h5 /*timer*/ {
 	.jumbotron {
 		margin-top: 20px;
 		max-height: 597px;
+		margin-left: 5px;
+		margin-right: 5px;
 	}
 
 	.jumbotron h1 {
-		font-size: 40px;
+		font-size: 35px;
 	}
 
 	h3 /*question*/{
-		letter-spacing: 0px;
+		letter-spacing: 3px;
 		word-spacing: 2px;
 		margin-top: 35px;
 		text-align: center;
-		font-size: 14px;	
+		font-size: 20px;	
+		margin-bottom: 25px;
+		line-height: 22px;
 	}
 
 	.glyphicon-off {
@@ -203,18 +223,23 @@ h5 /*timer*/ {
 		margin-top: 0px;
 	}
 
-	h5 /*timer*/{
-		font-size: 10px;
+	h5 /*timeremaining*/{
+		font-size: 18px;
 	}
 
 	h4 /*answers*/ {
 		font-size: 20px;
 		margin-left: 5px;
 		margin-right: 5px;
+		margin-bottom: 12px;
+	}
+
+	.answers {
+		margin-top: 15px;
 	}
 
 	.answerImage {
-		max-width: 300px;     /*center image and limit size*/
+		max-width: 250px;     /*center image and limit size*/
 		max-height: 250px;
 		display: block; 
 		margin: 0 auto;
