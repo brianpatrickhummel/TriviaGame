@@ -37,11 +37,7 @@ function startGame() {
 }		
 
 function loadQandA() {
-	// console.log(correctAnswers);
-	// console.log(incorrectAnswers);
-	// console.log(unansweredQuestions);
-	// console.log(indexQandA);
-	answered = false;    // will allow timeRemaining to be pushed back to <h5> after round reset....else statement in function timer()
+	answered = false;    
 	timeRemaining = 16;
 	intervalID = setInterval(timer, 1000);
 	if (answered === false){
