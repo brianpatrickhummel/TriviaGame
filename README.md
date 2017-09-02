@@ -1,6 +1,6 @@
 ## My second application: a simple trivia game.
 
-This Trivia Game is a responsive Javascript application that focuses on the use of Javascript Timing Events.  The DOM is manipulated via jQuery.  Animate.css library was used for animations, FontAwesome framework for Icons, and Bootstrap framework for responsive-layout. 
+This Trivia Game is a responsive Javascript application that focuses on the use of Javascript Timing Events.  The DOM is manipulated via jQuery.  Animate.css library was used for animations, FontAwesome framework for Icons, and Bootstrap framework for responsive-layout. Deployed via GitPages.
 
  ### Features:
  * Player has 15 seconds to select 1 of 4 possible answers to a trivia question
