@@ -94,15 +94,14 @@ function loadQandA() {
 		);
 	}
 	$("h4").click(function () {
+		answered = true; // stops the timer
 		var id = $(this).attr("id");
 		if (id === correct) {
-			answered = true; // stops the timer
 			$(".question").text(
 				"THE ANSWER IS: " + triviaGame[indexQandA].answer[correct]
 			);
 			correctAnswer();
 		} else {
-			answered = true; //stops the timer
 			$(".question").text(
 				"YOU CHOSE: " +
 				triviaGame[indexQandA].answer[id] +
